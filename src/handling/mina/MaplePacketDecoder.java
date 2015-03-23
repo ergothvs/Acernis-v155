@@ -65,7 +65,7 @@ public class MaplePacketDecoder extends CumulativeProtocolDecoder {
             decoderState.packetlength = -1;
 
             client.getReceiveCrypto().crypt(decryptedPacket);
-            MapleCustomEncryption.decryptData(decryptedPacket);
+          //  MapleCustomEncryption.decryptData(decryptedPacket);
             out.write(decryptedPacket);
             return true;
         }

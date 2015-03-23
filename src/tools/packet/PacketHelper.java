@@ -427,70 +427,68 @@ public class PacketHelper {
             mplew.writeLong(PacketHelper.getTime(p.getEndDate()));
         }
     }
-
+    
     public static void addCharStats(MaplePacketLittleEndianWriter mplew, MapleCharacter chr) {
-
         mplew.writeInt(chr.getId());
         mplew.writeAsciiString(chr.getName(), 13);
         mplew.write(chr.getGender());
         mplew.write(chr.getSkinColor());
         mplew.writeInt(chr.getFace());
         mplew.writeInt(chr.getHair());
-        mplew.writeZeroBytes(24);
+        // mplew.writeZeroBytes(24);
+
         mplew.write(chr.getLevel());
         mplew.writeShort(chr.getJob());
         chr.getStat().connectData(mplew);
         mplew.writeShort(chr.getRemainingAp());
         if (GameConstants.isSeparatedSp(chr.getJob())) {
-            int size = chr.getRemainingSpSize();
-            mplew.write(size);
-            for (int i = 0; i < chr.getRemainingSps().length; i++) {
-                if (chr.getRemainingSp(i) > 0) {
-                    mplew.write(i + 1);
-                    mplew.writeInt(chr.getRemainingSp(i));
-                }
-            }
+
+            mplew.write(0);
+
         } else {
-            mplew.writeShort(chr.getRemainingSp());
+            mplew.writeShort(0);
         }
+
         mplew.writeLong(chr.getExp());
         mplew.writeInt(chr.getFame());
-        mplew.writeInt(0); // 141
+        mplew.writeInt(0);
         mplew.writeInt(chr.getGachExp());
         mplew.writeInt(chr.getMapId());
         mplew.write(chr.getInitialSpawnpoint());
-        mplew.writeInt(0);
+
         mplew.writeShort(chr.getSubcategory());
         if (GameConstants.isDemonSlayer(chr.getJob()) || GameConstants.isXenon(chr.getJob()) || GameConstants.isDemonAvenger(chr.getJob())) {
-            mplew.writeInt(chr.getFaceMarking());
+            mplew.writeLong(0);
+        } else {
+            mplew.writeInt(0);
         }
         mplew.write(chr.getFatigue());
         mplew.writeInt(GameConstants.getCurrentDate());
         for (MapleTrait.MapleTraitType t : MapleTrait.MapleTraitType.values()) {
             mplew.writeInt(chr.getTrait(t).getTotalExp());
         }
-        //for (MapleTrait.MapleTraitType t : MapleTrait.MapleTraitType.values()) {
-        //    mplew.writeShort(0); //today's stats
-        //}
-        //mplew.write(0);
-        //mplew.writeLong(getTime(System.currentTimeMillis()));
-        mplew.writeZeroBytes(21);
-        mplew.writeInt(chr.getStat().pvpExp);
-        mplew.write(chr.getStat().pvpRank);
-        mplew.writeInt(chr.getBattlePoints());
-        mplew.write(5);
-        mplew.write(6); //new
-        mplew.writeInt(0);
-        addPartTimeJob(mplew, MapleCharacter.getPartTime(chr.getId()));
-        for (int i = 0; i < 9; i++) {
-            mplew.writeInt(0);
-            mplew.write(0);
-            mplew.writeInt(0);
+        for (MapleTrait.MapleTraitType t : MapleTrait.MapleTraitType.values()) {
+            mplew.writeShort(0);
         }
-        mplew.writeReversedLong(getTime(System.currentTimeMillis()));
+        mplew.write(0);
+        mplew.writeLong(getTime(-2L));
+        /*mplew.writeInt(chr.getStat().pvpExp);
+         mplew.write(chr.getStat().pvpRank);
+         mplew.writeInt(chr.getBattlePoints());
+         mplew.write(5);
+         mplew.write(6);
+         mplew.writeZeroBytes(5);
+
+         mplew.writeLong(0);
+         mplew.writeShort(0);
+         mplew.writeZeroBytes(3);
+         chr.getCharacterCard().connectData(mplew);
+         mplew.writeLong(0);*/
+        mplew.write(HexTool.getByteArrayFromHexString("00 00 00 00 0A 00 00 00 00 05 06 00 00 00 00 00 3B 37 4F 01 00 40 E0 FD 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 3B 37 4F 01 00 40 E0 FD"));
+
     }
 
-    public static void addCharLook(MaplePacketLittleEndianWriter mplew, MapleCharacterLook chr, boolean mega, boolean second) {
+   public static void addCharLook(MaplePacketLittleEndianWriter mplew, MapleCharacterLook chr, boolean mega, boolean second) {
         mplew.write(second ? chr.getSecondGender() : chr.getGender());
         mplew.write(second ? chr.getSecondSkinColor() : chr.getSkinColor());
         mplew.writeInt(second ? chr.getSecondFace() : chr.getFace());

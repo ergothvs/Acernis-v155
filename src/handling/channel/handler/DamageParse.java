@@ -12,7 +12,6 @@ import client.anticheat.CheatTracker;
 import client.anticheat.CheatingOffense;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
-import com.sun.media.sound.SF2Modulator;
 import constants.GameConstants;
 import constants.ServerConstants;
 import java.awt.Point;

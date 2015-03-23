@@ -516,27 +516,13 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
                 // [08] - locale
                 // [8E 00] - version
                 // [02 00] - patch version
+                c.getSession().write(LoginPacket.SAOlogin());
                 System.out.println(c.getSessionIPAddress() + " Connected!");
                 break;
             case PONG:
                 c.pongReceived();
                 break;
-      //          case CHANGE_PIC_REQUEST:
-   //             final String oldPic = slea.readMapleAsciiString();
-   //             final String newPic = slea.readMapleAsciiString();
-   //             int response = 6; // Couldn't process the request - Will never end as 6, but precautionary.
-    //            if (!c.getPic().equals(oldPic)) {
-    //                response = 20; // Incorrect pic entered
-    //            } else if (c.getPic().equals(oldPic)) {
-    //                c.setSecondPassword(newPic);
-    //                c.updateSecondPassword();
-     //               response = 0; // Success
-     //           }
-     //           c.getSession().write(LoginPacket.sendPicResponse(response));
-     //           break;  
-           // case STRANGE_DATA:
-                // Does nothing for now, HackShield's heartbeat
-            //    break;
+      
             case LOGIN_PASSWORD:
                 CharLoginHandler.login(slea, c);
                 break;
@@ -545,8 +531,8 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
                 break;
             case CLIENT_START:
                 if (c.getSessionIPAddress().contains("8.31.99.141") || c.getSessionIPAddress().contains("127.0.0.1")) {
-                    c.loginData("pow3rran9er");
-                    c.getSession().write(LoginPacket.getAuthSuccessRequest(c));
+                 c.loginData(ServerConstants.MASTERACCOUNT);
+                 c.getSession().write(LoginPacket.getAuthSuccessRequest(c));
                 }
                 break;
                 
@@ -1420,16 +1406,16 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
 
     public static boolean isSpamHeader(RecvPacketOpcode header) {
         switch (header) {
-            case CLIENT_AUTH:
+       /*     case CLIENT_AUTH:
             case MOVE_LIFE:
             case MOVE_PLAYER:
-            case SPECIAL_MOVE:
+            case SPECIAL_MOVE:*/
             /*case MOVE_ANDROID:
              case MOVE_DRAGON:
              case MOVE_SUMMON:
              case MOVE_FAMILIAR:
              case MOVE_PET:*/
-            case QUEST_ACTION:
+       /*     case QUEST_ACTION:
             case HEAL_OVER_TIME:
             case CHANGE_KEYMAP:
             case USE_INNER_PORTAL:
@@ -1437,16 +1423,16 @@ public class MapleServerHandler extends IoHandlerAdapter implements MapleServerH
             case TAKE_DAMAGE:
             case FRIENDLY_DAMAGE:
             case CLOSE_RANGE_ATTACK: //todo code zero
-            case RANGED_ATTACK: //todo code zero
+            case RANGED_ATTACK: //todo code zero*/
             //case ARAN_COMBO:
-            case SPECIAL_STAT:
+      /*      case SPECIAL_STAT:
             case UPDATE_HYPER:
             case RESET_HYPER:
-            case NPC_ACTION:
+            case NPC_ACTION:*/
             //case ANGELIC_CHANGE:
             case MOVE_PET:
 //            case DRESSUP_TIME:
-            case BUTTON_PRESSED:
+      //      case BUTTON_PRESSED:
                 return true;
         }
         return false;

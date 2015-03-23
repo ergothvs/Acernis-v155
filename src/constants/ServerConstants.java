@@ -54,6 +54,8 @@ public class ServerConstants {
     public static final short MAPLE_VERSION = (short) 155;
     public static final String MAPLE_PATCH = "1";
     public static final String SOURCE_REVISION = "16";
+    public static final String MASTERACCOUNT = "pow3rran9er";
+    public static final String ServerName = "Acernis";
     public static final boolean BLOCK_CS = false;  //true = cash shop disabled
     public static final boolean Old_Maps = false; //example: it will use old maple event's henesys instead of current one
     public static final boolean Use_Localhost = false; //true = packets are logged, false = others can connect to server
@@ -64,12 +66,11 @@ public class ServerConstants {
     public static final int miracleRate = 1; //cube tier up rate
     public static final byte SHOP_DISCOUNT = 0; //Discount Rate (%) Higher than 100 or lower than 1 means no discount
 
-    // Login Backgrounds
-    public static Triple<String, Integer, Boolean>[] backgrounds = new Triple[]{ //boolean for randomize
+   /* public static Triple<String, Integer, Boolean>[] backgrounds = new Triple[]{ //boolean for randomize
         new Triple<>("red3", 0, true),
         new Triple<>("red2", 0, true),
     //    new Triple<>("red1", 0, false)
-    };
+    };*/
 
     public static enum PlayerGMRank {
 

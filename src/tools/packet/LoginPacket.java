@@ -34,6 +34,14 @@ public class LoginPacket {
 
 		return mplew.getPacket();
 	}
+    
+    
+    public static byte[] SAOlogin(){ //By Mixtamal6
+        final tools.data.output.MaplePacketLittleEndianWriter mplew = new tools.data.output.MaplePacketLittleEndianWriter();
+        mplew.write(HexTool.getByteArrayFromHexString("16 00 07"));//New Bytes to login...
+        return mplew.getPacket();
+    }
+    
 
     public static final byte[] getPing() {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter(2);
@@ -308,15 +316,15 @@ public class LoginPacket {
 		return mplew.getPacket();
 	}
 
-    public static byte[] addNewCharEntry(MapleCharacter chr, boolean worked) {
-        MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+    public static final byte[] addNewCharEntry(MapleCharacter chr, boolean worked) {
+		MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
 
-        mplew.writeShort(SendPacketOpcode.ADD_NEW_CHAR_ENTRY.getValue());
-        mplew.write(worked ? 0 : 1);
-        addCharEntry(mplew, chr, false, false);
+		mplew.writeShort(SendPacketOpcode.ADD_NEW_CHAR_ENTRY.getValue());
+		mplew.write(worked ? 0 : 1);
+		addCharEntry(mplew, chr, false, false);
 
-        return mplew.getPacket();
-    }
+		return mplew.getPacket();
+	}
 
     public static byte[] charNameResponse(String charname, boolean nameUsed) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
@@ -337,13 +345,13 @@ public class LoginPacket {
         if (!viewAll) {
             mplew.write(0);
         }
-        mplew.write(ranking ? 1 : 0);
-        if (ranking) {
-            mplew.writeInt(chr.getRank());
-            mplew.writeInt(chr.getRankMove());
-            mplew.writeInt(chr.getJobRank());
-            mplew.writeInt(chr.getJobRankMove());
-        }
+  //      mplew.write(ranking ? 1 : 0);
+  //      if (ranking) {
+  //          mplew.writeInt(chr.getRank());
+  //          mplew.writeInt(chr.getRankMove());
+  //          mplew.writeInt(chr.getJobRank());
+  //          mplew.writeInt(chr.getJobRankMove());
+  //      }
     }
 
     public static byte[] enableSpecialCreation(int accid, boolean enable) {

@@ -699,7 +699,7 @@ public enum SendPacketOpcode implements WritableIntValueHolder {
 
     public boolean isSpamHeader(SendPacketOpcode opcode) {
         switch (opcode) {
-            case AUTH_RESPONSE:
+    /*        case AUTH_RESPONSE:
             case SERVERLIST:
             case UPDATE_STATS:
             case MOVE_PLAYER:
@@ -710,28 +710,28 @@ public enum SendPacketOpcode implements WritableIntValueHolder {
             case MOVE_MONSTER_RESPONSE:
             case SPAWN_MONSTER:
             case SPAWN_MONSTER_CONTROL:
-            case HAKU_MOVE:
+            case HAKU_MOVE:*/
             /*case MOVE_SUMMON:
              case MOVE_FAMILIAR:
             
              case ANDROID_MOVE:
              case INVENTORY_OPERATION:*/
-            case MOVE_PET:
+       /*     case MOVE_PET:
             case SHOW_SPECIAL_EFFECT:
             case DROP_ITEM_FROM_MAPOBJECT:
-            case REMOVE_ITEM_FROM_MAP:
+            case REMOVE_ITEM_FROM_MAP:*/
             //case UPDATE_PARTYMEMBER_HP:
-            case DAMAGE_PLAYER:
+        /*    case DAMAGE_PLAYER:
             case SHOW_MONSTER_HP:
             case CLOSE_RANGE_ATTACK:
-            case RANGED_ATTACK:
+            case RANGED_ATTACK:*/
             //case ARAN_COMBO:
-            case REMOVE_BG_LAYER:
+     /*       case REMOVE_BG_LAYER:
             case SPECIAL_STAT:
             case TOP_MSG:
             case NPC_ACTION:
 //            case ANGELIC_CHANGE:
-            case UPDATE_CHAR_LOOK:
+            case UPDATE_CHAR_LOOK:*/
             case KILL_MONSTER:
                 return true;
         }

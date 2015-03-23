@@ -3,6 +3,7 @@ package handling;
 public enum RecvPacketOpcode implements WritableIntValueHolder {
 
    //Login Opcodes
+        SAOLOGIN(false, (short) 0x16),
         LOGIN_REDIRECTOR(true, (short) 0x01),
 	GUEST_LOGIN(true, (short) 0x16),
 	BACK_TO_WORLDLIST(true, (short) 0x1A),//TODO HANDLE

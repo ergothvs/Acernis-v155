@@ -153,12 +153,12 @@ public class CharLoginHandler {
 
     public static void ServerListRequest(final MapleClient c) {
         /* Random Demon Avenger Background */
-        List<Triple<String, Integer, Boolean>> backgrounds = new LinkedList<>(); //boolean for randomize
+        //List<Triple<String, Integer, Boolean>> backgrounds = new LinkedList<>(); //boolean for randomize
         //backgrounds.add(new Pair<>("xsub", 0));
         //backgrounds.add(new Pair<>("xmain", 0));
         //backgrounds.add(new Pair<>("dsub", server.Randomizer.nextInt(2)));
         //backgrounds.add(new Pair<>("dmain", 0));
-        backgrounds.addAll(Arrays.asList(ServerConstants.backgrounds));
+       // backgrounds.addAll(Arrays.asList(ServerConstants.backgrounds));
       //  c.getSession().write(LoginPacket.changeBackground(backgrounds)); BACKGROUNDS, HIDDEN FOR NOW?
         if (ServerConstants.TESPIA) {
             for (TespiaWorldOption tespiaservers : TespiaWorldOption.values()) {
@@ -229,7 +229,7 @@ public class CharLoginHandler {
         }
 
         if (!WorldOption.getById(server).isAvailable() && !(c.isGm() && server == WorldConstants.gmserver)) {
-            c.getSession().write(CWvsContext.broadcastMsg(1, "We are sorry, but " + WorldConstants.getNameById(server) + " is currently not available. \r\nPlease try another world."));
+            //        c.getSession().write(CWvsContext.broadcastMsg(1, "We are sorry, but " + WorldConstants.getNameById(server) + " is currently not available. \r\nPlease try another world."));
             c.getSession().write(LoginPacket.getLoginFailed(1)); //Shows no message, but it is used to unstuck
             return;
         }
@@ -286,7 +286,8 @@ public class CharLoginHandler {
             System.out.println("char name hack: " + name);
             return;
         }
-        slea.readInt(); //-1
+      //  slea.readInt(); //-1
+        slea.skip(8);
         int job_type = slea.readInt();
         job = JobType.getByType(job_type);
         if (job == null) {
@@ -304,7 +305,8 @@ public class CharLoginHandler {
         subcategory = slea.readShort();
         gender = slea.readByte();
         skin = slea.readByte();
-        unk = slea.readByte(); //6/7/8
+        //unk = slea.readByte(); //6/7/8
+        slea.skip(1);
         face = slea.readInt();
         hair = slea.readInt();
         if (job.hairColor) {
